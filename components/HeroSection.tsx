@@ -49,7 +49,13 @@ export default function HeroSection() {
       </div>
 
       {/* ── Bottom fade: black gradient so CTAs sit cleanly ── */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
+      {/* Desktop fade */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent hidden md:block" />
+      {/* Mobile fade: aggressively blends the bottom half into solid black to hide the image's sharp edge */}
+      <div 
+        className="absolute inset-0 block md:hidden pointer-events-none" 
+        style={{ background: "linear-gradient(to top, #000 40%, rgba(0,0,0,0.9) 48%, rgba(0,0,0,0) 70%)" }} 
+      />
 
       {/* ── Minimal CTA row — sits below the image content ── */}
       <div className="relative z-10 w-full pb-32 md:pb-20 flex flex-col items-center gap-6">
