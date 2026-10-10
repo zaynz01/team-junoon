@@ -28,11 +28,21 @@ export default function HeroSection() {
     >
       {/* ── Background: the hangar reveal photograph — already has JUNOON in it ── */}
       <div ref={bgRef} className="absolute inset-0 will-change-transform scale-[1.05]">
+        {/* Desktop Image */}
         <Image
           src="/hero-main.jpg"
           alt="Team Junoon — Race Pakistan '27 car reveal"
           fill
-          className="object-cover object-center"
+          className="object-cover object-center hidden md:block"
+          priority
+          unoptimized
+        />
+        {/* Mobile Image */}
+        <Image
+          src="/hero-mobile.jpg"
+          alt="Team Junoon — Race Pakistan '27 car reveal"
+          fill
+          className="object-cover object-center block md:hidden"
           priority
           unoptimized
         />
