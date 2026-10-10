@@ -23,13 +23,39 @@ export default function Navbar() {
   const [activeHash, setActiveHash] = useState("");
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+
+      // Scroll Spy Logic
+      const sections = ["#hero", "#mission", "#engineering", "#team", "#contact"];
+      let currentSection = "";
+      
+      for (const section of sections) {
+        const el = document.querySelector(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          // If the middle of the screen is within this section
+          if (rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5) {
+            currentSection = section;
+          }
+        }
+      }
+      
+      if (currentSection === "#hero") {
+        setActiveHash("");
+      } else if (currentSection) {
+        setActiveHash(currentSection);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Initial check
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const go = (href: string) => {
-    setActiveHash(href);
+    setActiveHash(href === "#hero" ? "" : href);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -119,7 +145,7 @@ export default function Navbar() {
                 key={l.href}
                 onClick={() => go(l.href)}
                 className={`flex items-center justify-center h-12 rounded-full transition-all duration-300 overflow-hidden ${
-                  isActive ? "bg-red-600/20 px-5" : "bg-transparent hover:bg-white/5 w-12 px-0"
+                  isActive ? "bg-red-600/20 px-6" : "bg-transparent hover:bg-white/5 w-12 px-0"
                 }`}
               >
                 <Icon
@@ -136,7 +162,7 @@ export default function Navbar() {
                   }`}
                 >
                   <div className="overflow-hidden flex items-center">
-                    <span className="font-[family-name:var(--font-heading)] font-semibold text-[11px] uppercase tracking-[0.2em] whitespace-nowrap text-red-500 pl-2">
+                    <span className="font-[family-name:var(--font-heading)] font-semibold text-[11px] uppercase tracking-[0.2em] whitespace-nowrap text-red-500 pl-3">
                       {l.label}
                     </span>
                   </div>

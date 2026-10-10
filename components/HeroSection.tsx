@@ -24,7 +24,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full h-[100dvh] flex flex-col items-center justify-end overflow-hidden"
+      className="relative w-full h-[100dvh] flex flex-col items-center justify-end overflow-hidden bg-black"
     >
       {/* ── Background: the hangar reveal photograph — already has JUNOON in it ── */}
       <div ref={bgRef} className="absolute inset-0 will-change-transform scale-[1.05]">
@@ -39,7 +39,7 @@ export default function HeroSection() {
         />
         {/* Mobile Image */}
         <Image
-          src="/hero-mobile-new.png"
+          src="/hero-mobile.png"
           alt="Team Junoon — Race Pakistan '27 car reveal"
           fill
           className="object-cover object-center block md:hidden"
