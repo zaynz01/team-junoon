@@ -103,7 +103,7 @@ const TerminalInput = ({ id, label, num, type = "text" }: any) => (
           name={id}
           rows={3}
           required
-          className="w-full bg-zinc-950/80 border border-zinc-800/80 focus:border-red-600/50 focus:bg-black text-white p-4 font-[family-name:var(--font-data)] text-[11px] uppercase tracking-wide outline-none transition-all resize-none shadow-inner placeholder:text-zinc-700"
+          className="w-full bg-zinc-950/80 border border-zinc-800/80 focus:border-red-600/50 focus:bg-black text-white p-4 font-[family-name:var(--font-data)] text-[16px] md:text-[11px] uppercase tracking-wide outline-none transition-all resize-none shadow-inner placeholder:text-zinc-700"
           placeholder="ENTER PARAMETERS..."
         />
       ) : (
@@ -112,7 +112,7 @@ const TerminalInput = ({ id, label, num, type = "text" }: any) => (
           name={id}
           type={type}
           required
-          className="w-full bg-zinc-950/80 border border-zinc-800/80 focus:border-red-600/50 focus:bg-black text-white p-4 font-[family-name:var(--font-data)] text-[11px] uppercase tracking-wide outline-none transition-all shadow-inner placeholder:text-zinc-700"
+          className="w-full bg-zinc-950/80 border border-zinc-800/80 focus:border-red-600/50 focus:bg-black text-white p-4 font-[family-name:var(--font-data)] text-[16px] md:text-[11px] uppercase tracking-wide outline-none transition-all shadow-inner placeholder:text-zinc-700"
           placeholder="AWAITING INPUT..."
         />
       )}

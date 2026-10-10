@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
@@ -150,37 +150,42 @@ export default function EngineeringSection() {
               <div className="font-[family-name:var(--font-data)] text-[8px] tracking-widest mt-1" style={{ color: "#b45309" }}>FLOW: LAMINAR</div>
             </div>
 
-            {/* Animated airflow lines — BEHIND the car */}
-            <svg className="absolute inset-0 w-full h-full z-10 opacity-80" preserveAspectRatio="none" viewBox="0 0 1000 440">
-              {!prefersReduced && [...Array(10)].map((_, i) => {
-                const yBase = 160 + i * 14;
-                const yMid = 140 + i * 12;
-                const isRed = i === 4;
-                const isAmber = i === 7;
-                return (
-                  <motion.path
-                    key={i}
-                    d={`M -80 ${yBase} Q 250 ${yBase} 380 ${yMid} T 1080 ${yMid - 20}`}
-                    stroke={isRed ? "#dc2626" : isAmber ? "#b45309" : "rgba(255,255,255,0.07)"}
-                    strokeWidth={isRed ? "1.5" : isAmber ? "1" : "0.8"}
-                    fill="none"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: isRed ? [0, 0.9, 0] : isAmber ? [0, 0.5, 0] : [0, 0.6, 0] }}
-                    transition={{
-                      duration: 2.5 + (i % 4) * 0.6,
-                      repeat: Infinity,
-                      ease: "linear",
-                      delay: i * 0.28,
-                      opacity: { duration: 2.5 + (i % 4) * 0.6, repeat: Infinity, ease: "easeInOut", delay: i * 0.28 }
-                    }}
-                  />
-                );
-              })}
-            </svg>
+            {/* Scrollable container for mobile blueprint panning */}
+            <div className="absolute inset-0 overflow-x-auto overflow-y-hidden hide-scrollbar">
+              <div className="relative h-full w-[900px] md:w-full min-w-full">
+                {/* Animated airflow lines — BEHIND the car */}
+                <svg className="absolute inset-0 w-full h-full z-10 opacity-80" preserveAspectRatio="none" viewBox="0 0 1000 440">
+                  {!prefersReduced && [...Array(10)].map((_, i) => {
+                    const yBase = 160 + i * 14;
+                    const yMid = 140 + i * 12;
+                    const isRed = i === 4;
+                    const isAmber = i === 7;
+                    return (
+                      <motion.path
+                        key={i}
+                        d={`M -80 ${yBase} Q 250 ${yBase} 380 ${yMid} T 1080 ${yMid - 20}`}
+                        stroke={isRed ? "#dc2626" : isAmber ? "#b45309" : "rgba(255,255,255,0.07)"}
+                        strokeWidth={isRed ? "1.5" : isAmber ? "1" : "0.8"}
+                        fill="none"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: isRed ? [0, 0.9, 0] : isAmber ? [0, 0.5, 0] : [0, 0.6, 0] }}
+                        transition={{
+                          duration: 2.5 + (i % 4) * 0.6,
+                          repeat: Infinity,
+                          ease: "linear",
+                          delay: i * 0.28,
+                          opacity: { duration: 2.5 + (i % 4) * 0.6, repeat: Infinity, ease: "easeInOut", delay: i * 0.28 }
+                        }}
+                      />
+                    );
+                  })}
+                </svg>
 
-            {/* F1 silhouette — centered, the hero of this panel */}
-            <div className="absolute inset-0 flex items-center justify-center z-20 px-8 pt-8">
-              <F1Silhouette />
+                {/* F1 silhouette — centered, the hero of this panel */}
+                <div className="absolute inset-0 flex items-center justify-center z-20 px-8 pt-8">
+                  <F1Silhouette />
+                </div>
+              </div>
             </div>
 
             {/* Bottom overlay */}

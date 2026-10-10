@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useReducedMotion, useAnimation } from "framer-motion";
 
 const members = [
@@ -17,6 +17,12 @@ function DriverCard({ member, index, isInView, reduced }: { member: typeof membe
   const [hot, setHot] = useState(false);
   const isAmber = member.amberAccent;
 
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      setHot(true);
+    }
+  }, []);
+
   const onEnter = async () => {
     if (reduced) return;
     setHot(true);
@@ -24,7 +30,10 @@ function DriverCard({ member, index, isInView, reduced }: { member: typeof membe
     await sweep.start({ x: "110%", transition: { duration: 0.5, ease: [0.4, 0, 0.6, 1] } });
   };
 
-  const onLeave = () => setHot(false);
+  const onLeave = () => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
+    setHot(false);
+  };
 
   const accentColor = isAmber ? "#b45309" : "#dc2626";
   const accentColorDim = isAmber ? "rgba(180,83,9,0.15)" : "rgba(220,38,38,0.15)";
@@ -112,6 +121,25 @@ export default function TeamSection() {
   const reduced = !!useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  
+  // Auto-scroll affordance on mobile
+  useEffect(() => {
+    if (isInView && scrollRef.current && !hasScrolled) {
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        const timer = setTimeout(() => {
+          if (!hasScrolled && scrollRef.current) {
+            // Scroll to the second card (width of one card ~ 85vw)
+            const scrollAmount = window.innerWidth * 0.85;
+            scrollRef.current.scrollTo({ left: scrollAmount, behavior: "smooth" });
+          }
+        }, 2000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [isInView, hasScrolled]);
 
   return (
     <section id="team" className="relative overflow-hidden" style={{ background: "#0a0805" }}>
@@ -168,10 +196,18 @@ export default function TeamSection() {
         </motion.h2>
       </div>
 
-      {/* Driver grid */}
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 mt-8" style={{ gap: "1px", background: "rgba(180,83,9,0.08)" }}>
+      {/* Driver grid / Carousel */}
+      <div 
+        ref={scrollRef}
+        onScroll={() => setHasScrolled(true)}
+        onTouchStart={() => setHasScrolled(true)}
+        className="relative z-10 flex md:grid md:grid-cols-2 mt-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar" 
+        style={{ gap: "1px", background: "rgba(180,83,9,0.08)" }}
+      >
         {members.map((m, i) => (
-          <DriverCard key={m.number} member={m} index={i} isInView={isInView} reduced={reduced} />
+          <div key={m.number} className="w-[85vw] flex-shrink-0 md:w-auto snap-center md:snap-align-none">
+            <DriverCard member={m} index={i} isInView={isInView} reduced={reduced} />
+          </div>
         ))}
       </div>
 

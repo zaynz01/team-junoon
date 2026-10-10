@@ -52,7 +52,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
 
       {/* ── Minimal CTA row — sits below the image content ── */}
-      <div className="relative z-10 w-full pb-16 md:pb-20 flex flex-col items-center gap-6">
+      <div className="relative z-10 w-full pb-32 md:pb-20 flex flex-col items-center gap-6">
         <motion.div
           initial={prefersReduced ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
