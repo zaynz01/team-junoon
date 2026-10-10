@@ -108,9 +108,9 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* ─── MOBILE BOTTOM NAV (Apple-Style) ─── */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 pb-[env(safe-area-inset-bottom)]">
-        <div className="bg-[#050507]/60 backdrop-blur-[24px] saturate-[180%] border-t border-white/[0.08] flex items-center justify-around h-[68px] px-2 shadow-[0_-4px_24px_rgba(0,0,0,0.5)]">
+      {/* ─── MOBILE BOTTOM NAV (Floating Pill) ─── */}
+      <nav className="md:hidden fixed bottom-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4">
+        <div className="w-max mx-auto bg-[#050507]/60 backdrop-blur-[24px] saturate-[180%] border border-white/[0.08] rounded-full p-2 flex items-center gap-1 shadow-[0_8px_32px_rgba(0,0,0,0.5)] pointer-events-auto">
           {mobileLinks.map((l) => {
             const Icon = l.icon;
             const isActive = activeHash === l.href;
@@ -118,30 +118,29 @@ export default function Navbar() {
               <button
                 key={l.href}
                 onClick={() => go(l.href)}
-                className="relative flex flex-col items-center justify-center w-16 h-full gap-1 active:scale-90 transition-transform duration-200"
+                className={`flex items-center justify-center h-12 rounded-full transition-all duration-300 overflow-hidden ${
+                  isActive ? "bg-red-600/20 px-5" : "bg-transparent hover:bg-white/5 w-12 px-0"
+                }`}
               >
                 <Icon
-                  size={22}
-                  strokeWidth={isActive ? 2.5 : 1.5}
-                  className={`transition-colors duration-200 ${
+                  size={20}
+                  strokeWidth={isActive ? 2.5 : 2}
+                  className={`shrink-0 transition-colors duration-300 ${
                     isActive ? "text-red-500" : "text-zinc-500"
                   }`}
                 />
-                <span
-                  className={`text-[9px] font-semibold tracking-wide uppercase transition-colors duration-200 ${
-                    isActive ? "text-red-500" : "text-zinc-500"
+                
+                <div 
+                  className={`grid transition-[grid-template-columns,opacity] duration-300 ease-out ${
+                    isActive ? "grid-cols-[1fr] opacity-100" : "grid-cols-[0fr] opacity-0"
                   }`}
                 >
-                  {l.label}
-                </span>
-                {/* Active Dot */}
-                {isActive && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute -top-[1px] w-8 h-[2px] bg-red-600 rounded-b-full shadow-[0_0_8px_rgba(220,38,38,0.8)]"
-                    transition={{ type: "spring", bounce: 0, duration: 0.3 }}
-                  />
-                )}
+                  <div className="overflow-hidden flex items-center">
+                    <span className="font-[family-name:var(--font-heading)] font-semibold text-[11px] uppercase tracking-[0.2em] whitespace-nowrap text-red-500 pl-2">
+                      {l.label}
+                    </span>
+                  </div>
+                </div>
               </button>
             );
           })}

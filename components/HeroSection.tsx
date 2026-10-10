@@ -39,7 +39,7 @@ export default function HeroSection() {
         />
         {/* Mobile Image */}
         <Image
-          src="/hero-mobile.jpg"
+          src="/hero-mobile-new.png"
           alt="Team Junoon — Race Pakistan '27 car reveal"
           fill
           className="object-cover object-center block md:hidden"
