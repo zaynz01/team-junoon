@@ -135,8 +135,8 @@ export default function EngineeringSection() {
             initial={prefersReduced ? false : { opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:col-span-8 relative overflow-hidden carbon-fiber"
-            style={{ height: "440px", background: "#040a14", border: "1px solid rgba(220,38,38,0.1)" }}
+            className="lg:col-span-8 relative overflow-hidden carbon-fiber h-[420px] sm:h-[440px]"
+            style={{ background: "#040a14", border: "1px solid rgba(220,38,38,0.1)" }}
           >
             <CornerBrackets color="rgba(220,38,38,0.2)" />
 
@@ -150,11 +150,11 @@ export default function EngineeringSection() {
               <div className="font-[family-name:var(--font-data)] text-[8px] tracking-widest mt-1" style={{ color: "#b45309" }}>FLOW: LAMINAR</div>
             </div>
 
-            {/* Scrollable container for mobile blueprint panning */}
-            <div className="absolute inset-0 overflow-x-auto overflow-y-hidden hide-scrollbar">
-              <div className="relative h-full w-[900px] md:w-full min-w-full">
+            {/* Responsive blueprint car presentation */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="relative w-full h-full max-w-[650px] mx-auto px-6 sm:px-10 pt-12 pb-24 flex items-center justify-center">
                 {/* Animated airflow lines — BEHIND the car */}
-                <svg className="absolute inset-0 w-full h-full z-10 opacity-80" preserveAspectRatio="none" viewBox="0 0 1000 440">
+                <svg className="absolute inset-0 w-full h-full z-10 opacity-70" preserveAspectRatio="none" viewBox="0 0 1000 440">
                   {!prefersReduced && [...Array(10)].map((_, i) => {
                     const yBase = 160 + i * 14;
                     const yMid = 140 + i * 12;
@@ -181,16 +181,16 @@ export default function EngineeringSection() {
                   })}
                 </svg>
 
-                {/* F1 silhouette — centered, the hero of this panel */}
-                <div className="absolute inset-0 flex items-center justify-center z-20 px-8 pt-8">
+                {/* F1 silhouette — centered, scales responsively across all viewports */}
+                <div className="relative w-full max-h-full flex items-center justify-center z-20">
                   <F1Silhouette />
                 </div>
               </div>
             </div>
 
             {/* Bottom overlay */}
-            <div className="absolute bottom-0 left-0 right-0 px-6 pb-6 z-30" style={{ background: "linear-gradient(to top, #040a14 60%, transparent)" }}>
-              <h3 className="font-[family-name:var(--font-display)] font-bold text-white uppercase" style={{ fontSize: "clamp(1.8rem,3.5vw,3rem)", letterSpacing: "-0.02em" }}>
+            <div className="absolute bottom-0 left-0 right-0 px-6 pb-6 z-30" style={{ background: "linear-gradient(to top, #040a14 65%, transparent)" }}>
+              <h3 className="font-[family-name:var(--font-display)] font-bold text-white uppercase text-2xl sm:text-3xl lg:text-4xl" style={{ letterSpacing: "-0.02em" }}>
                 CFD Optimized
               </h3>
               <p className="font-[family-name:var(--font-body)] text-zinc-400 text-xs font-light max-w-sm mt-1">
@@ -200,14 +200,14 @@ export default function EngineeringSection() {
           </motion.div>
 
           {/* RIGHT STACK: 3 data panels */}
-          <div className="lg:col-span-4 flex flex-col gap-4" style={{ height: "440px" }}>
+          <div className="lg:col-span-4 flex flex-col gap-4 lg:h-[440px]">
 
             {/* CNC Tolerances */}
             <motion.div
               initial={prefersReduced ? false : { opacity: 0, x: 20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex-1 relative p-5 carbon-fiber flex flex-col justify-between overflow-hidden"
+              className="min-h-[125px] lg:min-h-0 flex-1 relative p-5 carbon-fiber flex flex-col justify-between overflow-hidden"
               style={{ background: "#040a14", border: "1px solid rgba(255,255,255,0.04)" }}
             >
               <CornerBrackets />
@@ -235,7 +235,7 @@ export default function EngineeringSection() {
               initial={prefersReduced ? false : { opacity: 0, x: 20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex-1 relative p-5 carbon-fiber flex flex-col justify-between overflow-hidden"
+              className="min-h-[125px] lg:min-h-0 flex-1 relative p-5 carbon-fiber flex flex-col justify-between overflow-hidden"
               style={{ background: "#040a14", border: "1px solid rgba(255,255,255,0.04)" }}
             >
               <CornerBrackets />
@@ -267,7 +267,7 @@ export default function EngineeringSection() {
               initial={prefersReduced ? false : { opacity: 0, x: 20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex-1 relative p-5 carbon-fiber flex items-center justify-between overflow-hidden"
+              className="min-h-[125px] lg:min-h-0 flex-1 relative p-5 carbon-fiber flex items-center justify-between overflow-hidden"
               style={{ background: "#040a14", border: "1px solid rgba(255,255,255,0.04)" }}
             >
               <CornerBrackets />

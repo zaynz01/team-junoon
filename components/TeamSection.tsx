@@ -106,7 +106,7 @@ function DriverCard({ member, index, isInView, reduced }: { member: typeof membe
 
       {/* Name + Role strip */}
       <div className="absolute bottom-0 left-0 right-0 px-6 pb-7 z-10">
-        <div className="font-[family-name:var(--font-heading)] text-[9px] tracking-[0.5em] uppercase mb-3 transition-colors duration-300" style={{ color: hot ? accentColor : `${accentColor}55` }}>
+        <div className="font-[family-name:var(--font-heading)] font-semibold text-[10px] tracking-[0.35em] uppercase mb-2.5 transition-colors duration-300" style={{ color: hot ? accentColor : `${accentColor}55` }}>
           {member.role}
         </div>
         <h3 className="font-[family-name:var(--font-display)] font-bold text-white uppercase" style={{ fontSize: "clamp(1.8rem,3.8vw,3rem)", letterSpacing: "-0.025em", lineHeight: 0.95 }}>
@@ -183,13 +183,13 @@ export default function TeamSection() {
       </div>
 
       {/* Editorial headline */}
-      <div ref={ref} className="relative z-10 overflow-hidden px-4 md:px-6">
+      <div ref={ref} className="relative z-10 overflow-hidden px-6 md:px-12">
         <motion.h2
           initial={reduced ? false : { opacity: 0, y: 80 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
           className="font-[family-name:var(--font-display)] font-bold text-white uppercase"
-          style={{ fontSize: "clamp(5rem,16vw,15rem)", letterSpacing: "-0.045em", lineHeight: 0.87 }}
+          style={{ fontSize: "clamp(4.2rem,15vw,15rem)", letterSpacing: "-0.045em", lineHeight: 0.87 }}
         >
           The<br />
           <span style={{ color: "rgba(255,255,255,0.09)" }}>Crew.</span>
@@ -201,11 +201,11 @@ export default function TeamSection() {
         ref={scrollRef}
         onScroll={() => setHasScrolled(true)}
         onTouchStart={() => setHasScrolled(true)}
-        className="relative z-10 flex md:grid md:grid-cols-2 mt-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar" 
+        className="relative z-10 flex md:grid md:grid-cols-2 mt-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar px-6 md:px-0" 
         style={{ gap: "1px", background: "rgba(180,83,9,0.08)" }}
       >
         {members.map((m, i) => (
-          <div key={m.number} className="w-[85vw] flex-shrink-0 md:w-auto snap-center md:snap-align-none">
+          <div key={m.number} className="w-[82vw] max-w-[340px] md:max-w-none md:w-auto flex-shrink-0 snap-center md:snap-align-none">
             <DriverCard member={m} index={i} isInView={isInView} reduced={reduced} />
           </div>
         ))}

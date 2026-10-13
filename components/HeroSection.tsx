@@ -27,22 +27,22 @@ export default function HeroSection() {
       className="relative w-full h-[100dvh] flex flex-col items-center justify-end overflow-hidden bg-black"
     >
       {/* ── Background: the hangar reveal photograph — already has JUNOON in it ── */}
-      <div ref={bgRef} className="absolute inset-0 will-change-transform scale-[1.05]">
-        {/* Desktop Image */}
+      <div ref={bgRef} className="absolute inset-0 will-change-transform scale-100 lg:scale-[1.05]">
+        {/* Desktop Image (>=1024px) */}
         <Image
           src="/hero-main.jpg"
           alt="Team Junoon — Race Pakistan '27 car reveal"
           fill
-          className="object-cover object-center hidden md:block"
+          className="object-cover object-center hidden lg:block"
           priority
           unoptimized
         />
-        {/* Mobile Image */}
+        {/* Mobile & Tablet Portrait Image (<1024px) */}
         <Image
           src="/hero-mobile.png"
           alt="Team Junoon — Race Pakistan '27 car reveal"
           fill
-          className="object-contain object-top block md:hidden pt-4"
+          className="object-contain object-top block lg:hidden pt-4"
           priority
           unoptimized
         />
@@ -50,15 +50,15 @@ export default function HeroSection() {
 
       {/* ── Bottom fade: black gradient so CTAs sit cleanly ── */}
       {/* Desktop fade */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent hidden md:block" />
-      {/* Mobile fade: aggressively blends the bottom half into solid black to hide the image's sharp edge */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent hidden lg:block" />
+      {/* Mobile & Tablet fade */}
       <div 
-        className="absolute inset-0 block md:hidden pointer-events-none" 
-        style={{ background: "linear-gradient(to top, #000 40%, rgba(0,0,0,0.9) 48%, rgba(0,0,0,0) 70%)" }} 
+        className="absolute inset-0 block lg:hidden pointer-events-none" 
+        style={{ background: "linear-gradient(to top, #000 35%, rgba(0,0,0,0.92) 46%, rgba(0,0,0,0) 70%)" }} 
       />
 
       {/* ── Minimal CTA row — sits below the image content ── */}
-      <div className="relative z-10 w-full pb-32 md:pb-20 flex flex-col items-center gap-6">
+      <div className="relative z-10 w-full pb-36 sm:pb-36 md:pb-28 lg:pb-20 flex flex-col items-center gap-5 sm:gap-6">
         <motion.div
           initial={prefersReduced ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}

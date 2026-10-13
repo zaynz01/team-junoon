@@ -73,14 +73,15 @@ export default function Navbar() {
       >
         <div className="max-w-[1440px] mx-auto px-12 h-[80px] flex items-center justify-between">
           {/* Logo */}
-          <button onClick={() => go("#hero")} className="flex-shrink-0 active:opacity-60 transition-opacity">
+          <button onClick={() => go("#hero")} className="flex-shrink-0 active:opacity-60 transition-all duration-200 hover:opacity-90">
             <Image
               src="/junoon-logo.png"
               alt="Team Junoon"
-              width={160}
-              height={70}
-              className="h-16 w-auto object-contain invert"
+              width={220}
+              height={66}
+              className="h-12 md:h-14 w-auto object-contain"
               priority
+              unoptimized
             />
           </button>
 
