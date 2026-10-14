@@ -61,10 +61,39 @@ export default function Navbar() {
 
   return (
     <>
+      {/* ─── MOBILE & TABLET TOP HEADER (Centered Logo) ─── */}
+      <header
+        className={`
+          lg:hidden fixed top-0 left-0 right-0 z-40 transition-all duration-500
+          ${scrolled
+            ? "bg-black/80 backdrop-blur-2xl border-b border-white/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.6)] pointer-events-auto"
+            : "bg-transparent pointer-events-none"
+          }
+        `}
+      >
+        <div className="w-full px-6 h-16 sm:h-18 md:h-20 flex items-center justify-center">
+          <button
+            onClick={() => go("#hero")}
+            className="pointer-events-auto relative flex items-center justify-center active:opacity-60 transition-transform duration-200 active:scale-95"
+            aria-label="Team Junoon - Back to top"
+          >
+            <Image
+              src="/junoon-logo.png"
+              alt="Team Junoon"
+              width={220}
+              height={66}
+              className="h-10 sm:h-11 md:h-12 w-auto object-contain"
+              priority
+              unoptimized
+            />
+          </button>
+        </div>
+      </header>
+
       {/* ─── DESKTOP TOP NAV ─── */}
       <nav
         className={`
-          hidden md:block fixed top-0 left-0 right-0 z-40 transition-all duration-500
+          hidden lg:block fixed top-0 left-0 right-0 z-40 transition-all duration-500
           ${scrolled
             ? "bg-black/75 backdrop-blur-2xl border-b border-white/[0.06]"
             : "bg-transparent"
@@ -79,7 +108,7 @@ export default function Navbar() {
               alt="Team Junoon"
               width={220}
               height={66}
-              className="h-12 md:h-14 w-auto object-contain"
+              className="h-14 w-auto object-contain"
               priority
               unoptimized
             />
@@ -136,7 +165,7 @@ export default function Navbar() {
       </nav>
 
       {/* ─── MOBILE BOTTOM NAV (Floating Pill) ─── */}
-      <nav className="md:hidden fixed bottom-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4">
+      <nav className="lg:hidden fixed bottom-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4">
         <div className="w-max mx-auto bg-[#050507]/60 backdrop-blur-[24px] saturate-[180%] border border-white/[0.08] rounded-full p-2 flex items-center gap-1 shadow-[0_8px_32px_rgba(0,0,0,0.5)] pointer-events-auto">
           {mobileLinks.map((l) => {
             const Icon = l.icon;
